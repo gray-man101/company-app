@@ -1,0 +1,7 @@
+<div>
+  <input type="text" class="form-control" id="login" required [(ngModel)]="model.login" name="login"
+         placeholder="Login"/><br>
+  <input type="password" class="form-control" id="password" required [(ngModel)]="model.password" name="password"
+         placeholder="Password"/><br>
+  <input type="submit" value="Login" (click)="submitForm()"/>
+</div>
