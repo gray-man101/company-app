@@ -9,7 +9,9 @@ import {Ln} from "../ln";
 })
 export class MainComponent implements OnInit {
 
-  ls: Ln[] = []
+  ls: Ln[] = [];
+  showForm: boolean;
+  newLn: Ln = new Ln();
 
   constructor(private httpClient: HttpClient) {
   }
@@ -19,6 +21,26 @@ export class MainComponent implements OnInit {
       this.ls = data['ls']
       console.log(this.ls)
     })
+  }
+
+  addNewLn() {
+    this.httpClient.post('http://localhost:8080/ln', this.newLn).subscribe(
+      (val) => {
+        console.log("POST call successful value returned in body");
+        console.log(val)
+      },
+      (response) => {
+        console.log("POST call in error", response);
+      }
+    );
+  }
+
+  showNewLoanForm(){
+    return this.showForm;
+  }
+
+  toggleForm(){
+    this.showForm = true
   }
 
 }

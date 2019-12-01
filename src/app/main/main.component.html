@@ -1,5 +1,21 @@
 <div *ngFor="let ln of ls">
   <div>
-    {{ln.amount}} : {{ln.status}}
+    {{ln.debtorName}} {{ln.amount}} : {{ln.status}}
+  </div>
+</div>
+<div>
+  <button *ngIf="!showNewLoanForm()" (click)="toggleForm()">Add new</button>
+  <div *ngIf="showNewLoanForm()">
+    <label for="debtorName">Debtor name</label>
+    <input type="text" name="debtorName" id="debtorName" placeholder="Debtor name" [(ngModel)]="newLn.debtorName"/><br>
+    <label for="amount">Amount</label>
+    <input type="number" name="amount" id="amount" placeholder="Amount" [(ngModel)]="newLn.amount"/><br>
+    <label for="status">Status</label>
+    <select name="status" id="status" [(ngModel)]="newLn.status">
+      <option name="NEW">NEW</option>
+      <option name="PROCESSED">PROCESSED</option>
+      <option name="AWAITING">AWAITING</option>
+    </select><br>
+    <input type="submit" value="Submit" (click)="addNewLn()"/>
   </div>
 </div>
