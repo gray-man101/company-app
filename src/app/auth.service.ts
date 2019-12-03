@@ -20,8 +20,8 @@ export class AuthService {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
       }).subscribe(
       (val) => {
-        console.log("POST call successful value returned in body", val["token"]);
-        sessionStorage.setItem('token', val["token"])
+        console.log("POST call successful 123");
+        sessionStorage.setItem('token', '123')
         this.router.navigate(['/'])
       },
       (response) => {

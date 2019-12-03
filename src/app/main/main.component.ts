@@ -17,7 +17,17 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpClient.get('http://localhost:8080/ls').subscribe((data: Ln[]) => {
+    this.httpClient.post(
+      'http://localhost:8080/graphql/api/v1',
+      'query {\n' +
+      '    ls {\n' +
+      '        id\n' +
+      '        amount\n' +
+      '        dbName\n' +
+      '        status\n' +
+      '    }\n' +
+      '}'
+    ).subscribe((data: Ln[]) => {
       this.ls = data['ls']
       console.log(this.ls)
     })
