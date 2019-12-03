@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -11,7 +11,14 @@ export class AuthService {
   }
 
   login(login: string, password: string) {
-    this.httpClient.post('http://localhost:8080/login', {'login': login, 'password': password}).subscribe(
+    const body = new HttpParams()
+      .set('username', login)
+      .set('password', password);
+    this.httpClient.post(
+      'http://localhost:8080/login',
+      body.toString(), {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      }).subscribe(
       (val) => {
         console.log("POST call successful value returned in body", val["token"]);
         sessionStorage.setItem('token', val["token"])
