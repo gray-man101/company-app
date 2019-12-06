@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Ln} from "../ln";
+import {HttpClient} from '@angular/common/http';
+import {Ln} from '../ln';
 
 @Component({
   selector: 'app-main',
@@ -17,27 +17,18 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpClient.post(
-      'http://localhost:8080/graphql/api/v1',
-      'query {\n' +
-      '    ls {\n' +
-      '        id\n' +
-      '        amount\n' +
-      '        dbName\n' +
-      '        status\n' +
-      '    }\n' +
-      '}'
-    ).subscribe((data: Ln[]) => {
-      this.ls = data['ls']
+    this.newLn = new Ln()
+    this.httpClient.get('http://localhost:8080/api/ln').subscribe((data: Ln[]) => {
+      this.ls = data['content']
       console.log(this.ls)
     })
   }
 
   addNewLn() {
-    this.httpClient.post('http://localhost:8080/ln', this.newLn).subscribe(
+    this.httpClient.post('http://localhost:8080/api/ln', this.newLn).subscribe(
       (val) => {
-        console.log("POST call successful value returned in body");
-        console.log(val)
+        console.log("POST call successful");
+        this.ngOnInit()
       },
       (response) => {
         console.log("POST call in error", response);
@@ -47,6 +38,17 @@ export class MainComponent implements OnInit {
 
   showNewLoanForm(){
     return this.showForm;
+  }
+
+  deleteLn(id: number){
+    this.httpClient.delete('http://localhost:8080/api/ln/' + id).subscribe(
+      (val) => {
+        this.ngOnInit()
+      },
+      (response) => {
+        console.log("DELETE call in error", response);
+      }
+    )
   }
 
   toggleForm(){

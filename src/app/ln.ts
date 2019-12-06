@@ -1,5 +1,6 @@
 export class Ln {
-  debtorName: string
+  id: number
+  dbName: string
   amount: number
-  status: string
+  status: string = 'NEW'
 }
