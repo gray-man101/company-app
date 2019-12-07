@@ -9,7 +9,7 @@ import {LnComponent} from './ln/ln.component';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: '', component: MainComponent, canActivate: [AuthGuardService]},
-  {path: 'ln/:id', component: LnComponent, canActivate: [AuthGuardService]}
+  {path: 'ln/:lnId', component: LnComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

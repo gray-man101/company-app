@@ -1,1 +1,14 @@
-<p>ln works!</p>
+<div *ngFor="let pm of ps">
+  <div>
+    {{pm.id}} - {{pm.amount}} - {{pm.created}}
+    <button (click)="deletePm(pm.id)">delete pm</button>
+  </div>
+</div>
+<div>
+  <button (click)="toggleForm()">Add new pm</button>
+  <div *ngIf="showNewPmForm()">
+    <label for="amount">Amount</label>
+    <input type="number" name="amount" id="amount" placeholder="Amount" [(ngModel)]="newPm.amount"/><br>
+    <input type="submit" value="Submit" (click)="addNewPm()"/>
+  </div>
+</div>

@@ -11,48 +11,50 @@ export class MainComponent implements OnInit {
 
   ls: Ln[] = [];
   showForm: boolean;
-  newLn: Ln = new Ln();
+  newLn: Ln;
 
   constructor(private httpClient: HttpClient) {
   }
 
   ngOnInit() {
-    this.newLn = new Ln()
+    this.showForm = false;
+    this.newLn = new Ln();
+    this.newLn = new Ln();
     this.httpClient.get('http://localhost:8080/api/ln').subscribe((data: Ln[]) => {
-      this.ls = data['content']
-      console.log(this.ls)
-    })
+      this.ls = data['content'];
+      console.log(this.ls);
+    });
   }
 
   addNewLn() {
     this.httpClient.post('http://localhost:8080/api/ln', this.newLn).subscribe(
       (val) => {
-        console.log("POST call successful");
-        this.ngOnInit()
+        console.log('POST call successful');
+        this.ngOnInit();
       },
       (response) => {
-        console.log("POST call in error", response);
+        console.log('POST call in error', response);
       }
     );
   }
 
-  showNewLoanForm(){
+  showNewLoanForm() {
     return this.showForm;
   }
 
-  deleteLn(id: number){
+  deleteLn(id: number) {
     this.httpClient.delete('http://localhost:8080/api/ln/' + id).subscribe(
       (val) => {
-        this.ngOnInit()
+        this.ngOnInit();
       },
       (response) => {
-        console.log("DELETE call in error", response);
+        console.log('DELETE call in error', response);
       }
-    )
+    );
   }
 
-  toggleForm(){
-    this.showForm = true
+  toggleForm() {
+    this.showForm = true;
   }
 
 }
