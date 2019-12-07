@@ -11,41 +11,52 @@ import {Pm} from '../pm';
 export class LnComponent implements OnInit {
 
   private lnId: number;
-  private ps: Pm[] = [];
-  private showForm: boolean;
-  newPm: Pm;
+  private ps: Pm[];
+  private showNewPmForm: boolean;
+  private newPm: Pm;
+  private editPmId: number;
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
   }
 
   ngOnInit() {
-    this.showForm = false;
+    this.editPmId = null;
+    this.showNewPmForm = false;
     this.newPm = new Pm();
     this.route.params.subscribe(params => {
       this.lnId = params['lnId'];
-      this.httpClient.get('http://localhost:8080/api/ln/' + this.lnId + '/pm')
-        .subscribe((data: Pm[]) => {
-          this.ps = data['content'];
-          console.log(this.ps);
-        });
+      this.getPs();
     });
   }
 
-  showNewPmForm() {
-    return this.showForm;
+  getPs() {
+    this.httpClient.get('http://localhost:8080/api/ln/' + this.lnId + '/pm')
+      .subscribe((data: Pm[]) => {
+        this.ps = data['content'];
+      });
   }
 
-  addNewPm() {
+  createPm() {
     this.httpClient.post('http://localhost:8080/api/ln/' + this.lnId + '/pm', this.newPm)
       .subscribe(
         (val) => {
-          console.log('POST call successful');
           this.ngOnInit();
         },
         (response) => {
           console.log('POST call in error', response);
         }
       );
+  }
+
+  updatePm(pm: Pm) {
+    this.httpClient.put('http://localhost:8080/api/ln/' + this.lnId + '/pm/' + pm.id, pm).subscribe(
+      (val) => {
+        this.ngOnInit();
+      },
+      (response) => {
+        console.log('PUT call in error', response);
+      }
+    );
   }
 
   deletePm(id: number) {
@@ -60,8 +71,12 @@ export class LnComponent implements OnInit {
       );
   }
 
-  toggleForm() {
-    this.showForm = true;
+  toggleCreateForm() {
+    this.showNewPmForm = true;
+  }
+
+  toggleUpdateForm(id: number) {
+    this.editPmId = id;
   }
 
 }

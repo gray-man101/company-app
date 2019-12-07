@@ -1,14 +1,19 @@
 <div *ngFor="let pm of ps">
-  <div>
+  <div *ngIf="editPmId != pm.id">
     {{pm.id}} - {{pm.amount}} - {{pm.created}}
+    <button (click)="toggleUpdateForm(pm.id)">update pm</button>
     <button (click)="deletePm(pm.id)">delete pm</button>
+  </div>
+  <div *ngIf="editPmId == pm.id">
+    <input type="number" [(ngModel)]="pm.amount">
+    <button (click)="updatePm(pm)">update pm</button>
   </div>
 </div>
 <div>
-  <button (click)="toggleForm()">Add new pm</button>
-  <div *ngIf="showNewPmForm()">
+  <button (click)="toggleCreateForm()">Add new pm</button>
+  <div *ngIf="showNewPmForm">
     <label for="amount">Amount</label>
     <input type="number" name="amount" id="amount" placeholder="Amount" [(ngModel)]="newPm.amount"/><br>
-    <input type="submit" value="Submit" (click)="addNewPm()"/>
+    <input type="submit" value="Submit" (click)="createPm()"/>
   </div>
 </div>

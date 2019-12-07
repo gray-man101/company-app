@@ -22,16 +22,18 @@ export class MainComponent implements OnInit {
     this.showNewLnForm = false;
     this.newLn = new Ln();
     this.newLn = new Ln();
+    this.getLs();
+  }
+
+  getLs() {
     this.httpClient.get('http://localhost:8080/api/ln').subscribe((data: Ln[]) => {
       this.ls = data['content'];
-      console.log(this.ls);
     });
   }
 
-  addNewLn() {
+  createLn() {
     this.httpClient.post('http://localhost:8080/api/ln', this.newLn).subscribe(
       (val) => {
-        console.log('POST call successful');
         this.ngOnInit();
       },
       (response) => {
@@ -43,7 +45,6 @@ export class MainComponent implements OnInit {
   updateLn(ln: Ln) {
     this.httpClient.put('http://localhost:8080/api/ln/' + ln.id, ln).subscribe(
       (val) => {
-        console.log('PUT call successful');
         this.ngOnInit();
       },
       (response) => {
