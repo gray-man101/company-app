@@ -8,12 +8,14 @@ import {MainComponent} from './main/main.component';
 import {FormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {HttpInterceptorService} from "./http-interceptor.service";
+import { LnComponent } from './ln/ln.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    LnComponent
   ],
   imports: [
     BrowserModule,
