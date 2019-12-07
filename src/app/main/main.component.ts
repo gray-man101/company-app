@@ -21,7 +21,6 @@ export class MainComponent implements OnInit {
     this.editLnId = null;
     this.showNewLnForm = false;
     this.newLn = new Ln();
-    this.newLn = new Ln();
     this.getLs();
   }
 
