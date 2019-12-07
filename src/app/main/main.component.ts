@@ -10,14 +10,16 @@ import {Ln} from '../ln';
 export class MainComponent implements OnInit {
 
   ls: Ln[] = [];
-  showForm: boolean;
+  showNewLnForm: boolean;
+  editLnId: number;
   newLn: Ln;
 
   constructor(private httpClient: HttpClient) {
   }
 
   ngOnInit() {
-    this.showForm = false;
+    this.editLnId = null;
+    this.showNewLnForm = false;
     this.newLn = new Ln();
     this.newLn = new Ln();
     this.httpClient.get('http://localhost:8080/api/ln').subscribe((data: Ln[]) => {
@@ -38,8 +40,16 @@ export class MainComponent implements OnInit {
     );
   }
 
-  showNewLoanForm() {
-    return this.showForm;
+  updateLn(ln: Ln) {
+    this.httpClient.put('http://localhost:8080/api/ln/' + ln.id, ln).subscribe(
+      (val) => {
+        console.log('PUT call successful');
+        this.ngOnInit();
+      },
+      (response) => {
+        console.log('PUT call in error', response);
+      }
+    );
   }
 
   deleteLn(id: number) {
@@ -53,8 +63,12 @@ export class MainComponent implements OnInit {
     );
   }
 
+  toggleUpdateForm(id: number) {
+    this.editLnId = id;
+  }
+
   toggleForm() {
-    this.showForm = true;
+    this.showNewLnForm = !this.showNewLnForm;
   }
 
 }
