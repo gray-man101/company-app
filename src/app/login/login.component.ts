@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm() {
-    this.authService.login(this.model.login, this.model.password);
+    // this.authService.login(this.model.login, this.model.password);
   }
 
 }
