@@ -25,7 +25,7 @@ export class MainComponent implements OnInit {
   }
 
   getLs() {
-    this.httpClient.get('http://localhost:8080/api/ln').subscribe((data: Ln[]) => {
+    this.httpClient.get('http://localhost:8080/api/ln').subscribe((data) => {
       this.ls = data['content'];
     });
   }

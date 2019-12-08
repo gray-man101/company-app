@@ -31,7 +31,7 @@ export class LnComponent implements OnInit {
 
   getPs() {
     this.httpClient.get('http://localhost:8080/api/ln/' + this.lnId + '/pm')
-      .subscribe((data: Pm[]) => {
+      .subscribe((data) => {
         this.ps = data['content'];
       });
   }
