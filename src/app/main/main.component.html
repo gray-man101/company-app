@@ -1,0 +1,2 @@
+<app-customer-main *ngIf="authService.hasRole('CUSTOMER')"></app-customer-main>
+<app-company-main *ngIf="authService.hasRole('COMPANY_ADMIN')"></app-company-main>

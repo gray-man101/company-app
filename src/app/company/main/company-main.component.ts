@@ -3,11 +3,11 @@ import {HttpClient} from '@angular/common/http';
 import {Ln} from '../../ln';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  selector: 'app-company-main',
+  templateUrl: './company-main.component.html',
+  styleUrls: ['./company-main.component.css']
 })
-export class MainComponent implements OnInit {
+export class CompanyMainComponent implements OnInit {
 
   ls: Ln[] = [];
   showNewLnForm: boolean;

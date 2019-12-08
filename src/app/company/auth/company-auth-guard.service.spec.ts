@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { CompanyAuthGuardService } from './company-auth-guard.service';
 
-describe('AuthGuardService', () => {
+describe('CompanyAuthGuardService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {

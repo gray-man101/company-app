@@ -33,6 +33,10 @@ export class AuthService {
     return this.authenticated;
   }
 
+  hasRole(role: string) {
+    return role == this.role;
+  }
+
   // login(login: string, password: string) {
   //   const body = new HttpParams()
   //     .set('username', login)
