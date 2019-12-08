@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Ln} from '../ln';
+import {Ln} from '../../ln';
 
 @Component({
   selector: 'app-main',

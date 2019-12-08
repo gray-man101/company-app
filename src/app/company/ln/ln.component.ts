@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {Pm} from '../pm';
+import {Pm} from '../../pm';
 
 @Component({
   selector: 'app-ln',

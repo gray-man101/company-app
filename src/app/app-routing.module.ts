@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
-import {MainComponent} from './main/main.component';
-import {CompanyAuthGuardService} from './auth/company-auth-guard.service';
-import {LnComponent} from './ln/ln.component';
+import {MainComponent} from './company/main/main.component';
+import {CompanyAuthGuardService} from './company/auth/company-auth-guard.service';
+import {LnComponent} from './company/ln/ln.component';
 import {AnonymousAuthGuardService} from './auth/anonymous-auth-guard.service';
 
 
