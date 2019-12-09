@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LnComponent } from './ln.component';
+import { CompanyLnComponent } from './company-ln.component';
 
 describe('LnComponent', () => {
-  let component: LnComponent;
-  let fixture: ComponentFixture<LnComponent>;
+  let component: CompanyLnComponent;
+  let fixture: ComponentFixture<CompanyLnComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LnComponent ]
+      declarations: [ CompanyLnComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LnComponent);
+    fixture = TestBed.createComponent(CompanyLnComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

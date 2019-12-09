@@ -5,10 +5,10 @@ import {Pm} from '../../pm';
 
 @Component({
   selector: 'app-ln',
-  templateUrl: './ln.component.html',
-  styleUrls: ['./ln.component.css']
+  templateUrl: './company-ln.component.html',
+  styleUrls: ['./company-ln.component.css']
 })
-export class LnComponent implements OnInit {
+export class CompanyLnComponent implements OnInit {
 
   private lnId: number;
   private ps: Pm[];

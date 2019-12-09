@@ -7,18 +7,20 @@ import {LoginComponent} from './login/login.component';
 import {CompanyMainComponent} from './company/main/company-main.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {LnComponent} from './company/ln/ln.component';
-import { CustomerMainComponent } from './customer/customer-main.component';
+import {CompanyLnComponent} from './company/ln/company-ln.component';
+import { CustomerMainComponent } from './customer/main/customer-main.component';
 import { MainComponent } from './main/main.component';
+import { AvailableLnComponent } from './customer/customer-ln/available-ln.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CompanyMainComponent,
-    LnComponent,
+    CompanyLnComponent,
     CustomerMainComponent,
-    MainComponent
+    MainComponent,
+    AvailableLnComponent
   ],
   imports: [
     BrowserModule,
