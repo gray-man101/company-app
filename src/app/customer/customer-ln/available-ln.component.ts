@@ -19,6 +19,7 @@ export class AvailableLnComponent implements OnInit {
   }
 
   getAvailableLs() {
+    //TODO add interceptor with {withCredentials: true}
     this.httpClient.get('http://localhost:8080/api/availableLs').subscribe((data) => {
       this.ls = data['content'];
     });

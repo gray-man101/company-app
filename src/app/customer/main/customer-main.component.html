@@ -1,5 +1,5 @@
 <div>
-  Balance: {{balance}}
+  Balance: {{authService.getCurrentUserValue().balance}}
   <button (click)="showTopUpForm = true" *ngIf="!showTopUpForm">top up</button>
   <input type="number" *ngIf="showTopUpForm" [(ngModel)]="topUpAmount">
   <button *ngIf="showTopUpForm" (click)="topUp()">submit</button>

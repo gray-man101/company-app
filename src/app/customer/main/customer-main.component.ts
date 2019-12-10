@@ -10,7 +10,6 @@ import {HttpClient} from '@angular/common/http';
 })
 export class CustomerMainComponent implements OnInit {
 
-  private balance: number;
   private showTopUpForm: boolean;
   private topUpAmount: number;
   private showWithdrawForm: boolean;
@@ -24,9 +23,6 @@ export class CustomerMainComponent implements OnInit {
     this.topUpAmount = 0;
     this.showWithdrawForm = false;
     this.withdrawAmount = 0;
-    this.httpClient.get('http://localhost:8080/api/account').subscribe((data) => {
-      this.balance = data['balance'];
-    });
   }
 
   topUp() {
