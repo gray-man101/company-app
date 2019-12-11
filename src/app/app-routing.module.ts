@@ -9,9 +9,9 @@ import {AvailableLnComponent} from './customer/customer-ln/available-ln.componen
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', component: MainComponent, canActivate: [AuthGuardService], data: {roles: ['COMPANY_ADMIN', 'CUSTOMER']}},
-  {path: 'ln/:lnId', component: CompanyLnComponent, canActivate: [AuthGuardService], data: {roles: ['COMPANY_ADMIN']}},
-  {path: 'availableLs', component: AvailableLnComponent, canActivate: [AuthGuardService], data: {roles: ['CUSTOMER']}}
+  {path: '', component: MainComponent, canActivate: [AuthGuardService], data: {roles: ['ROLE_COMPANY_ADMIN', 'ROLE_CUSTOMER']}},
+  {path: 'ln/:lnId', component: CompanyLnComponent, canActivate: [AuthGuardService], data: {roles: ['ROLE_COMPANY_ADMIN']}},
+  {path: 'availableLs', component: AvailableLnComponent, canActivate: [AuthGuardService], data: {roles: ['ROLE_CUSTOMER']}}
 ];
 
 @NgModule({

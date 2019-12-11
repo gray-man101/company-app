@@ -39,14 +39,11 @@ export class AuthService {
       {
         headers: new HttpHeaders()
           .set('Content-Type', 'application/x-www-form-urlencoded'),
-        observe: 'response',
-        withCredentials: true,
+        observe: 'response'
       })
       .subscribe(
         (response) => {
-          console.log('response');
-          console.log(response);
-          this.httpClient.get('http://localhost:8080/api/account', {withCredentials: true}).subscribe(
+          this.httpClient.get('http://localhost:8080/api/role').subscribe(
             (data: AccountInfo) => {
               localStorage.setItem('accountInfo', JSON.stringify(data));
               this.accountInfoSubject.next(data);
@@ -68,6 +65,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('accountInfo');
     this.accountInfoSubject.next(null);
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 }
