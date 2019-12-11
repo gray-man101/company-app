@@ -21,6 +21,10 @@ export class AuthService {
     return this.accountInfoSubject.value;
   }
 
+  isAuthenticated() {
+    return false;
+  }
+
   hasRole(role: string) {
     if (!this.accountInfoSubject.value) {
       return false;

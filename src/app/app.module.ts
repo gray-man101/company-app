@@ -9,9 +9,10 @@ import {FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {CompanyLnComponent} from './company/ln/company-ln.component';
 import {CustomerMainComponent} from './customer/main/customer-main.component';
-import {MainComponent} from './main/main.component';
 import {AvailableLnComponent} from './customer/customer-ln/available-ln.component';
 import {AuthInterceptor} from './auth/auth-interceptor';
+import {IvstComponent} from './customer/ivst/ivst.component';
+import { PsComponent } from './company/ps/ps.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,9 @@ import {AuthInterceptor} from './auth/auth-interceptor';
     CompanyMainComponent,
     CompanyLnComponent,
     CustomerMainComponent,
-    MainComponent,
-    AvailableLnComponent
+    AvailableLnComponent,
+    IvstComponent,
+    PsComponent
   ],
   imports: [
     BrowserModule,

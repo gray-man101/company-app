@@ -1,55 +1,47 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Ln} from '../../ln';
 import {HttpClient} from '@angular/common/http';
-import {Pm} from '../../pm';
 
 @Component({
   selector: 'app-ln',
-  templateUrl: './company-ln.component.html',
-  styleUrls: ['./company-ln.component.css']
+  templateUrl: './company-ln.component.html'
 })
 export class CompanyLnComponent implements OnInit {
 
-  private lnId: number;
-  private ps: Pm[];
-  private showNewPmForm: boolean;
-  private newPm: Pm;
-  private editPmId: number;
+  ls: Ln[] = [];
+  showNewLnForm: boolean;
+  editLnId: number;
+  newLn: Ln;
 
-  constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient) {
   }
 
   ngOnInit() {
-    this.editPmId = null;
-    this.showNewPmForm = false;
-    this.newPm = new Pm();
-    this.route.params.subscribe(params => {
-      this.lnId = params['lnId'];
-      this.getPs();
+    this.editLnId = null;
+    this.showNewLnForm = false;
+    this.newLn = new Ln();
+    this.getLs();
+  }
+
+  getLs() {
+    this.httpClient.get('http://localhost:8080/api/ln').subscribe((data) => {
+      this.ls = data['content'];
     });
   }
 
-  getPs() {
-    this.httpClient.get('http://localhost:8080/api/ln/' + this.lnId + '/pm')
-      .subscribe((data) => {
-        this.ps = data['content'];
-      });
+  createLn() {
+    this.httpClient.post('http://localhost:8080/api/ln', this.newLn).subscribe(
+      (val) => {
+        this.ngOnInit();
+      },
+      (response) => {
+        console.log('POST call in error', response);
+      }
+    );
   }
 
-  createPm() {
-    this.httpClient.post('http://localhost:8080/api/ln/' + this.lnId + '/pm', this.newPm)
-      .subscribe(
-        (val) => {
-          this.ngOnInit();
-        },
-        (response) => {
-          console.log('POST call in error', response);
-        }
-      );
-  }
-
-  updatePm(pm: Pm) {
-    this.httpClient.put('http://localhost:8080/api/ln/' + this.lnId + '/pm/' + pm.id, pm).subscribe(
+  updateLn(ln: Ln) {
+    this.httpClient.put('http://localhost:8080/api/ln/' + ln.id, ln).subscribe(
       (val) => {
         this.ngOnInit();
       },
@@ -59,24 +51,23 @@ export class CompanyLnComponent implements OnInit {
     );
   }
 
-  deletePm(id: number) {
-    this.httpClient.delete('http://localhost:8080/api/ln/' + this.lnId + '/pm/' + id)
-      .subscribe(
-        (val) => {
-          this.ngOnInit();
-        },
-        (response) => {
-          console.log('DELETE call in error', response);
-        }
-      );
-  }
-
-  toggleCreateForm() {
-    this.showNewPmForm = true;
+  deleteLn(id: number) {
+    this.httpClient.delete('http://localhost:8080/api/ln/' + id).subscribe(
+      (val) => {
+        this.ngOnInit();
+      },
+      (response) => {
+        console.log('DELETE call in error', response);
+      }
+    );
   }
 
   toggleUpdateForm(id: number) {
-    this.editPmId = id;
+    this.editLnId = id;
+  }
+
+  toggleForm() {
+    this.showNewLnForm = !this.showNewLnForm;
   }
 
 }

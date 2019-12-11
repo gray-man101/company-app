@@ -1,0 +1,13 @@
+<div>
+  Balance: {{authService.getCurrentUserValue().balance}}
+  <button (click)="showTopUpForm = true" *ngIf="!showTopUpForm">top up</button>
+  <input type="number" *ngIf="showTopUpForm" [(ngModel)]="topUpAmount">
+  <button *ngIf="showTopUpForm" (click)="topUp()">submit</button>
+  <button *ngIf="showTopUpForm" (click)="showTopUpForm = false; topUpAmount = 0">cancel</button>
+  <button (click)="showWithdrawForm = true" *ngIf="!showWithdrawForm">withdraw</button>
+  <input type="number" *ngIf="showWithdrawForm" [(ngModel)]="withdrawAmount">
+  <button *ngIf="showWithdrawForm" (click)="withdraw()">submit</button>
+  <button *ngIf="showWithdrawForm" (click)="showWithdrawForm = false; withdrawAmount = 0">cancel</button>
+</div>
+
+<a [routerLink]="['availableLs']">Available ls for ivst</a>

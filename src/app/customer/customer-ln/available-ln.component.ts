@@ -4,8 +4,7 @@ import {Ln} from '../../ln';
 
 @Component({
   selector: 'app-customer-ln',
-  templateUrl: './available-ln.component.html',
-  styleUrls: ['./available-ln.component.css']
+  templateUrl: './available-ln.component.html'
 })
 export class AvailableLnComponent implements OnInit {
 
