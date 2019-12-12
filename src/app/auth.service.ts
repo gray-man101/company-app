@@ -51,7 +51,7 @@ export class AuthService {
             (data: AccountInfo) => {
               localStorage.setItem('accountInfo', JSON.stringify(data));
               this.accountInfoSubject.next(data);
-              this.router.navigate(['/']);
+              this.router.navigate([data.homePath]);
             },
             (response) => {
               console.log('failed to log in');

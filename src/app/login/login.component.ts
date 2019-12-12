@@ -12,8 +12,9 @@ export class LoginComponent implements OnInit {
   model: LoginCredentials = new LoginCredentials();
 
   constructor(private authService: AuthService, private router: Router) {
-    if (this.authService.getCurrentUserValue()) {
-      router.navigate(['/']);
+    let currentUserValue = this.authService.getCurrentUserValue();
+    if (currentUserValue) {
+      router.navigate([currentUserValue.homePath]);
     }
   }
 

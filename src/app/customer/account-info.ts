@@ -4,4 +4,5 @@ export class AccountInfo {
   email: string;
   balance: number;
   role: string;
+  homePath: string;
 }
