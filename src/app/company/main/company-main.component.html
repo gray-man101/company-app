@@ -1,2 +1,29 @@
-<button (click)="authService.logout()">logout</button>
-aa company
+<div *ngFor="let ln of ls">
+  <div *ngIf="editLnId != ln.id">
+    {{ln.dbName}} {{ln.amount}} : {{ln.status}}
+    <button (click)="toggleUpdateForm(ln.id)">update ln</button>
+    <button (click)="deleteLn(ln.id)">delete ln</button>
+    <a [routerLink]="['/admin/ln/' + ln.id]">payments</a>
+  </div>
+  <div *ngIf="editLnId == ln.id">
+    <input type="text" [(ngModel)]="ln.dbName"/>
+    <input type="number" [(ngModel)]="ln.amount"> :
+    <select [(ngModel)]="ln.status">
+      <option value="NEW" [selected]="ln.status == 'NEW'">NEW</option>
+      <option value="IN_PROGRESS" [selected]="ln.status == 'IN_PROGRESS'">IN PROGRESS</option>
+      <option value="COMPLETE" [selected]="ln.status == 'COMPLETE'">COMPLETE</option>
+      <option value="FAILED" [selected]="ln.status == 'FAILED'">FAILED</option>
+    </select>
+    <button (click)="updateLn(ln)">update ln</button>
+  </div>
+</div>
+<div>
+  <button *ngIf="!showNewLnForm" (click)="toggleForm()">Add new ln</button>
+  <div *ngIf="showNewLnForm">
+    <label for="dbName">Debtor name</label>
+    <input type="text" name="dbName" id="dbName" placeholder="Debtor name" [(ngModel)]="newLn.dbName"/><br>
+    <label for="amount">Amount</label>
+    <input type="number" name="amount" id="amount" placeholder="Amount" [(ngModel)]="newLn.amount"/><br>
+    <input type="submit" value="Submit" (click)="createLn()"/>
+  </div>
+</div>

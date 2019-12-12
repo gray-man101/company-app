@@ -11,8 +11,6 @@ import {CompanyLnComponent} from './company/ln/company-ln.component';
 import {CustomerMainComponent} from './customer/main/customer-main.component';
 import {AvailableLnComponent} from './customer/customer-ln/available-ln.component';
 import {AuthInterceptor} from './auth/auth-interceptor';
-import {IvstComponent} from './customer/ivst/ivst.component';
-import { PsComponent } from './company/ps/ps.component';
 
 @NgModule({
   declarations: [
@@ -21,9 +19,7 @@ import { PsComponent } from './company/ps/ps.component';
     CompanyMainComponent,
     CompanyLnComponent,
     CustomerMainComponent,
-    AvailableLnComponent,
-    IvstComponent,
-    PsComponent
+    AvailableLnComponent
   ],
   imports: [
     BrowserModule,

@@ -10,34 +10,10 @@ import {CompanyMainComponent} from './company/main/company-main.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {
-    path: 'admin',
-    component: CompanyMainComponent,
-    canActivate: [AuthGuardService],
-    data: {roles: ['ROLE_COMPANY_ADMIN']},
-    children: [
-      {
-        path: 'ln/:lnId',
-        component: CompanyLnComponent,
-        canActivate: [AuthGuardService],
-        data: {roles: ['ROLE_COMPANY_ADMIN']}
-      }
-    ]
-  },
-  {
-    path: '',
-    component: CustomerMainComponent,
-    canActivate: [AuthGuardService],
-    data: {roles: ['ROLE_CUSTOMER']},
-    children: [
-      {
-        path: 'availableLs',
-        component: AvailableLnComponent,
-        canActivate: [AuthGuardService],
-        data: {roles: ['ROLE_CUSTOMER']}
-      }
-    ]
-  }
+  {path: 'admin', component: CompanyMainComponent, canActivate: [AuthGuardService], data: {roles: ['ROLE_COMPANY_ADMIN']}},
+  {path: '', component: CustomerMainComponent, canActivate: [AuthGuardService], data: {roles: ['ROLE_CUSTOMER']}},
+  {path: 'admin/ln/:lnId', component: CompanyLnComponent, canActivate: [AuthGuardService], data: {roles: ['ROLE_COMPANY_ADMIN']}},
+  {path: 'availableLs', component: AvailableLnComponent, canActivate: [AuthGuardService], data: {roles: ['ROLE_CUSTOMER']}}
 ];
 
 @NgModule({

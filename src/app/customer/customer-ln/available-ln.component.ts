@@ -14,6 +14,7 @@ export class AvailableLnComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('this.getAvailableLs()')
     this.getAvailableLs();
   }
 
