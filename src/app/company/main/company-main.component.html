@@ -1,3 +1,4 @@
+<button (click)="authService.logout()">logout</button>
 <div *ngFor="let ln of ls">
   <div *ngIf="editLnId != ln.id">
     {{ln.dbName}} {{ln.amount}} : {{ln.status}}

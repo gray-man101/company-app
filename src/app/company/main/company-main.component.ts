@@ -14,7 +14,7 @@ export class CompanyMainComponent implements OnInit {
   editLnId: number;
   newLn: Ln;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private authService: AuthService, private httpClient: HttpClient) {
   }
 
   ngOnInit() {
