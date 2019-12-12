@@ -1,24 +1,24 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {AccountInfo} from './customer/account-info';
 import {Router} from '@angular/router';
+import {RoleInfo} from './role-info';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private accountInfoSubject: BehaviorSubject<AccountInfo>;
-  public accountInfo: Observable<AccountInfo>;
+  private roleInfoSubject: BehaviorSubject<RoleInfo>;
+  public roleInfo: Observable<RoleInfo>;
 
   constructor(private httpClient: HttpClient, private router: Router) {
-    this.accountInfoSubject = new BehaviorSubject<AccountInfo>(JSON.parse(localStorage.getItem('accountInfo')));
-    this.accountInfo = this.accountInfoSubject.asObservable();
+    this.roleInfoSubject = new BehaviorSubject<RoleInfo>(JSON.parse(localStorage.getItem('roleInfo')));
+    this.roleInfo = this.roleInfoSubject.asObservable();
   }
 
-  getCurrentUserValue(): AccountInfo {
-    return this.accountInfoSubject.value;
+  getCurrentUserRole(): RoleInfo {
+    return this.roleInfoSubject.value;
   }
 
   isAuthenticated() {
@@ -26,11 +26,11 @@ export class AuthService {
   }
 
   hasRole(role: string) {
-    if (!this.accountInfoSubject.value) {
+    if (!this.roleInfoSubject.value) {
       return false;
     }
 
-    return this.accountInfoSubject.value.role == role;
+    return this.roleInfoSubject.value.role == role;
   }
 
   login(username: string, password: string) {
@@ -48,35 +48,37 @@ export class AuthService {
       .subscribe(
         (response) => {
           this.httpClient.get('http://localhost:8080/api/role').subscribe(
-            (data: AccountInfo) => {
-              localStorage.setItem('accountInfo', JSON.stringify(data));
-              this.accountInfoSubject.next(data);
-              this.router.navigate([data.homePath]);
+            (roleInfo: RoleInfo) => {
+              localStorage.setItem('roleInfo', JSON.stringify(roleInfo));
+              this.roleInfoSubject.next(roleInfo);
+              this.router.navigate([roleInfo.homePath]);
             },
             (response) => {
-              console.log('failed to log in');
+              console.log('failed to retrieve role');
               console.log(response);
               this.logout();
             }
           );
         },
         (response) => {
-          alert('failed to log in ' + response);
+          console.log('failed to log in');
+          console.log(response);
+          alert('failed to log in: ' + response);
         }
       );
   }
 
   logout() {
-    localStorage.removeItem('accountInfo');
+    localStorage.removeItem('roleInfo');
     return this.httpClient.post('http://localhost:8080/logout', null)
       .subscribe(
         (data) => {
-          this.accountInfoSubject.next(null);
+          this.roleInfoSubject.next(null);
           this.router.navigate(['/login']);
         },
         (response) => {
           console.log('failed to log out' + response);
-          this.accountInfoSubject.next(null);
+          this.roleInfoSubject.next(null);
           this.router.navigate(['/login']);
         }
       );

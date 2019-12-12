@@ -3,21 +3,22 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {Observable, throwError} from 'rxjs';
 import {AuthService} from '../auth.service';
 import {catchError} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(err => {
       console.log('intercepted shit');
-      if (401 == err.status) {
+      console.log(err.status + ' ' + req.url);
+      if ([0, 401].indexOf(err.status) != -1 && !req.url.endsWith('/logout')) {
         this.authService.logout();
-        location.reload();
       }
 
       const error = err.error.message || err.statusText;

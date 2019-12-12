@@ -31,7 +31,7 @@ export class AvailableLnComponent implements OnInit {
       },
       (response) => {
         console.log('POST call in error', response);
-        alert('failed to invest in ln: ' + response.error.message);
+        alert('failed to invest in ln: ' + response);
       }
     );
   }

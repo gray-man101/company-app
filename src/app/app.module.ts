@@ -11,7 +11,7 @@ import {CompanyLnComponent} from './company/ln/company-ln.component';
 import {CustomerMainComponent} from './customer/main/customer-main.component';
 import {AvailableLnComponent} from './customer/customer-ln/available-ln.component';
 import {AuthInterceptor} from './auth/auth-interceptor';
-import {ErrorInterceptor} from './auth/error-interceptor.service';
+import {ErrorInterceptor} from './auth/error-interceptor';
 
 @NgModule({
   declarations: [

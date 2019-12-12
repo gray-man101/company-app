@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth.service';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
+import {AccountInfo} from '../account-info';
 
 @Component({
   selector: 'app-customer-main',
@@ -12,6 +13,7 @@ export class CustomerMainComponent implements OnInit {
   private topUpAmount: number;
   private showWithdrawForm: boolean;
   private withdrawAmount: number;
+  private accountInfo = new AccountInfo();
 
   constructor(private httpClient: HttpClient, private authService: AuthService) {
   }
@@ -21,6 +23,11 @@ export class CustomerMainComponent implements OnInit {
     this.topUpAmount = 0;
     this.showWithdrawForm = false;
     this.withdrawAmount = 0;
+    this.httpClient.get('http://localhost:8080/api/account').subscribe(
+      (accountInfo: AccountInfo) => {
+        this.accountInfo = accountInfo;
+      }
+    );
   }
 
   topUp() {

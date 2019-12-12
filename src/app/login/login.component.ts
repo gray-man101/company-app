@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   model: LoginCredentials = new LoginCredentials();
 
   constructor(private authService: AuthService, private router: Router) {
-    let currentUserValue = this.authService.getCurrentUserValue();
+    let currentUserValue = this.authService.getCurrentUserRole();
     if (currentUserValue) {
       router.navigate([currentUserValue.homePath]);
     }

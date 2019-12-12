@@ -1,6 +1,7 @@
 <button (click)="authService.logout()">logout</button>
 <div>
-  Balance: {{authService.getCurrentUserValue().balance}}
+  {{accountInfo.firstName}} {{accountInfo.lastName}}<br>
+  Balance: {{accountInfo.balance}}
   <button (click)="showTopUpForm = true" *ngIf="!showTopUpForm">top up</button>
   <input type="number" *ngIf="showTopUpForm" [(ngModel)]="topUpAmount">
   <button *ngIf="showTopUpForm" (click)="topUp()">submit</button>
