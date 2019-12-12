@@ -68,7 +68,17 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('accountInfo');
-    this.accountInfoSubject.next(null);
-    this.router.navigate(['/login']);
+    return this.httpClient.post('http://localhost:8080/logout', null)
+      .subscribe(
+        (data) => {
+          this.accountInfoSubject.next(null);
+          this.router.navigate(['/login']);
+        },
+        (response) => {
+          console.log('failed to log out' + response);
+          this.accountInfoSubject.next(null);
+          this.router.navigate(['/login']);
+        }
+      );
   }
 }

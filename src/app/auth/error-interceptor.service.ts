@@ -7,16 +7,15 @@ import {catchError} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class ErrorInterceptorService implements HttpInterceptor {
+export class ErrorInterceptor implements HttpInterceptor {
 
   constructor(private authService: AuthService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(err => {
-      console.log('caught error');
-      console.log(req);
-      if ([401, 403].indexOf(err.status) !== -1) {
+      console.log('intercepted shit');
+      if (401 == err.status) {
         this.authService.logout();
         location.reload();
       }

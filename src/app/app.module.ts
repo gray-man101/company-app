@@ -11,6 +11,7 @@ import {CompanyLnComponent} from './company/ln/company-ln.component';
 import {CustomerMainComponent} from './customer/main/customer-main.component';
 import {AvailableLnComponent} from './customer/customer-ln/available-ln.component';
 import {AuthInterceptor} from './auth/auth-interceptor';
+import {ErrorInterceptor} from './auth/error-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -25,9 +26,12 @@ import {AuthInterceptor} from './auth/auth-interceptor';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

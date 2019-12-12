@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth.service';
-import {Ln} from "../../ln";
-import {HttpClient} from "@angular/common/http";
+import {Ln} from '../../ln';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-company-main',
@@ -36,6 +36,7 @@ export class CompanyMainComponent implements OnInit {
         this.ngOnInit();
       },
       (response) => {
+        alert('Failed to create ln: ' + response.error.message);
         console.log('POST call in error', response);
       }
     );
@@ -47,6 +48,7 @@ export class CompanyMainComponent implements OnInit {
         this.ngOnInit();
       },
       (response) => {
+        alert('Failed to update ln: ' + response.error.message);
         console.log('PUT call in error', response);
       }
     );
@@ -58,6 +60,7 @@ export class CompanyMainComponent implements OnInit {
         this.ngOnInit();
       },
       (response) => {
+        alert('Failed to delete ln: ' + response.error.message);
         console.log('DELETE call in error', response);
       }
     );

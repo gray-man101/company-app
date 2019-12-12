@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Ln} from '../../ln';
 import {HttpClient} from '@angular/common/http';
-import {Pm} from "../../pm";
-import {ActivatedRoute} from "@angular/router";
+import {Pm} from '../../pm';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-ln',
@@ -43,6 +42,7 @@ export class CompanyLnComponent implements OnInit {
           this.ngOnInit();
         },
         (response) => {
+          alert('Failed to create pm: ' + response.error.message);
           console.log('POST call in error', response);
         }
       );
@@ -54,6 +54,7 @@ export class CompanyLnComponent implements OnInit {
         this.ngOnInit();
       },
       (response) => {
+        alert('Failed to update pm: ' + response.error.message);
         console.log('PUT call in error', response);
       }
     );
@@ -66,16 +67,17 @@ export class CompanyLnComponent implements OnInit {
           this.ngOnInit();
         },
         (response) => {
+          alert('Failed to delete pm: ' + response.error.message);
           console.log('DELETE call in error', response);
         }
       );
   }
 
   toggleCreateForm() {
-    this.showNewPmForm = true;
+    this.showNewPmForm = !this.showNewPmForm;
   }
 
-  toggleUpdateForm(id: number) {
+  startEditingPm(id: number) {
     this.editPmId = id;
   }
 
