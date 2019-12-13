@@ -1,4 +1,4 @@
-export class Pm {
+export class Payment {
   id: number;
   amount: number;
   created: string;

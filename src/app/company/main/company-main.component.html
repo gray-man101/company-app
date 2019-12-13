@@ -1,39 +1,52 @@
 <button (click)="authService.logout()">logout</button>
-<p *ngIf="ls.length > 0">Payments can be created for lns in status 'IN_PROGRESS'. For ln to get into status 'IN_PROGRESS' someone should invest in it</p>
-<table *ngIf="ls.length > 0">
-  <tr><td>Db name</td><td>Amount</td><td>Amount to return</td><td>Status</td><td></td></tr>
-  <tr *ngFor="let ln of ls">
-    <td *ngIf="editLnId != ln.id">{{ln.dbName}}</td>
-    <td *ngIf="editLnId == ln.id"><input type="text" [(ngModel)]="ln.dbName"/></td>
-    <td *ngIf="editLnId != ln.id">{{ln.amount}}</td>
-    <td *ngIf="editLnId == ln.id"><input type="number" [(ngModel)]="ln.amount"/></td>
-    <td *ngIf="editLnId != ln.id">{{ln.amountToReturn}}</td>
-    <td *ngIf="editLnId == ln.id"><input type="number" [(ngModel)]="ln.amountToReturn"/></td>
-    <td>{{ln.status}}</td>
+<p *ngIf="loans.length > 0">Payments can be created for lns in status 'IN_PROGRESS'. For ln to get into status
+  'IN_PROGRESS' someone should invest in it</p>
+<table *ngIf="loans.length > 0" border="1">
+  <tr>
+    <td>Debtor name</td>
+    <td>Amount</td>
+    <td>Amount to return</td>
+    <td>Investor interest %</td>
+    <td>Status</td>
+    <td>Action</td>
+  </tr>
+  <tr *ngFor="let loan of loans">
+    <td *ngIf="editLnId != loan.id">{{loan.debtorName}}</td>
+    <td *ngIf="editLnId == loan.id"><input type="text" [(ngModel)]="loan.debtorName"/></td>
+    <td *ngIf="editLnId != loan.id">{{loan.amount}}</td>
+    <td *ngIf="editLnId == loan.id"><input type="number" [(ngModel)]="loan.amount"/></td>
+    <td *ngIf="editLnId != loan.id">{{loan.amountToReturn}}</td>
+    <td *ngIf="editLnId == loan.id"><input type="number" [(ngModel)]="loan.amountToReturn"/></td>
+    <td *ngIf="editLnId != loan.id">{{loan.investorInterest}}</td>
+    <td *ngIf="editLnId == loan.id"><input type="number" [(ngModel)]="loan.investorInterest"/></td>
+    <td>{{loan.status}}</td>
     <td>
-      <span *ngIf="editLnId != ln.id">
-        <button (click)="toggleUpdateForm(ln.id)">edit ln</button>
-        <button (click)="deleteLn(ln.id)">delete ln</button>
+      <span *ngIf="editLnId != loan.id">
+        <button (click)="toggleUpdateForm(loan.id)">edit ln</button>
+        <button (click)="deleteLoan(loan.id)">delete ln</button>
       </span>
-      <span *ngIf="editLnId == ln.id">
-        <button (click)="updateLn(ln)">update ln</button>
+      <span *ngIf="editLnId == loan.id">
+        <button (click)="updateLn(loan)">update ln</button>
         <button (click)="editLnId = null">cancel</button>
       </span>
-      <a [routerLink]="['/admin/ln/' + ln.id]" *ngIf="ln.status == 'IN_PROGRESS'">payments</a>
+      <a [routerLink]="['/admin/loan/' + loan.id]" *ngIf="loan.status == 'IN_PROGRESS'">payments</a>
     </td>
   </tr>
 </table>
 <div>
-  <button *ngIf="!showNewLnForm" (click)="toggleForm()">Add new ln</button>
-  <div *ngIf="showNewLnForm">
+  <button *ngIf="!showNewLoanForm" (click)="toggleForm()">Add new ln</button>
+  <div *ngIf="showNewLoanForm">
     <label for="dbName">Debtor name</label>
-    <input type="text" name="dbName" id="dbName" placeholder="Debtor name" [(ngModel)]="newLn.dbName"/><br>
+    <input type="text" name="dbName" id="dbName" placeholder="Debtor name" [(ngModel)]="newLoan.debtorName"/><br>
     <label for="amount">Amount</label>
-    <input type="number" name="amount" id="amount" placeholder="Amount" [(ngModel)]="newLn.amount"/><br>
+    <input type="number" name="amount" id="amount" placeholder="Amount" [(ngModel)]="newLoan.amount"/><br>
     <label for="amountToReturn">Amount to return</label>
     <input type="number" name="amountToReturn" id="amountToReturn" placeholder="Amount to return"
-           [(ngModel)]="newLn.amountToReturn"/><br>
-    <button (click)="createLn()">submit</button>
-    <button (click)="showNewLnForm = false">cancel</button>
+           [(ngModel)]="newLoan.amountToReturn"/><br>
+    <label for="investorInterest">Investor interest %</label>
+    <input type="number" name="investorInterest" id="investorInterest" placeholder="Investor interest %"
+           [(ngModel)]="newLoan.investorInterest"/><br>
+    <button (click)="createLoan()">submit</button>
+    <button (click)="showNewLoanForm = false">cancel</button>
   </div>
 </div>

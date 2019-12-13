@@ -15,8 +15,6 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(err => {
-      console.log('intercepted shit');
-      console.log(err.status + ' ' + req.url);
       if ([0, 401].indexOf(err.status) != -1 && !req.url.endsWith('/logout')) {
         this.authService.logout();
       }

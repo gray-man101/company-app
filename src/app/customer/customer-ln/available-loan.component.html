@@ -1,0 +1,17 @@
+<table *ngIf="loans.length > 0 ">
+  <tr>
+    <td>Debtor name</td>
+    <td>Loan amount</td>
+    <td>Status</td>
+    <td>Investor interest %</td>
+    <td></td>
+  </tr>
+  <tr *ngFor="let loan of loans">
+    <td>{{loan.debtorName}}</td>
+    <td>{{loan.amount}}</td>
+    <td>{{loan.status}}</td>
+    <td>{{loan.investorInterest}}</td>
+    <td><button (click)="invest(loan.id)">invest {{loan.amount}}</button></td>
+  </tr>
+</table>
+<a [routerLink]="['']">Home</a>

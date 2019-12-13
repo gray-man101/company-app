@@ -12,5 +12,22 @@
   <button *ngIf="showWithdrawForm" (click)="showWithdrawForm = false; withdrawAmount = 0">cancel</button>
 </div>
 
-<a [routerLink]="['availableLs']">Available ls for ivst</a>
+<table *ngIf="investments.length > 0">
+  <tr>
+    <td>Debtor name</td>
+    <td>Number of payments</td>
+    <td>Paid amount</td>
+    <td>Overall amount</td>
+    <td>Amount to receive</td>
+  </tr>
+  <tr *ngFor="let investment of investments">
+    <td>{{investment.debtorName}}</td>
+    <td>{{investment.payments}}</td>
+    <td>{{investment.paidAmount}}</td>
+    <td>{{investment.amount}}</td>
+    <td>{{investment.amountToReceive}}</td>
+  </tr>
+</table>
+
+<a [routerLink]="['availableLoans']">Available loans for investments</a>
 

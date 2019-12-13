@@ -1,18 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Pm} from '../../pm';
+import {Payment} from '../../payment';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-ln',
-  templateUrl: './company-ln.component.html'
+  templateUrl: './company-loan.component.html'
 })
-export class CompanyLnComponent implements OnInit {
+export class CompanyLoanComponent implements OnInit {
 
   private lnId: number;
-  private ps: Pm[];
+  private ps: Payment[];
   private showNewPmForm: boolean;
-  private newPm: Pm;
+  private newPm: Payment;
   private editPmId: number;
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
@@ -21,7 +21,7 @@ export class CompanyLnComponent implements OnInit {
   ngOnInit() {
     this.editPmId = null;
     this.showNewPmForm = false;
-    this.newPm = new Pm();
+    this.newPm = new Payment();
     this.route.params.subscribe(params => {
       this.lnId = params['lnId'];
       this.getPs();
@@ -48,8 +48,8 @@ export class CompanyLnComponent implements OnInit {
       );
   }
 
-  updatePm(pm: Pm) {
-    this.httpClient.put('http://localhost:8080/api/ln/' + this.lnId + '/pm/' + pm.id, pm).subscribe(
+  updatePayment(payment: Payment) {
+    this.httpClient.put('http://localhost:8080/api/loan/' + this.lnId + '/payment/' + payment.id, payment).subscribe(
       (val) => {
         this.ngOnInit();
       },
@@ -60,8 +60,8 @@ export class CompanyLnComponent implements OnInit {
     );
   }
 
-  deletePm(id: number) {
-    this.httpClient.delete('http://localhost:8080/api/ln/' + this.lnId + '/pm/' + id)
+  deletePayment(id: number) {
+    this.httpClient.delete('http://localhost:8080/api/loan/' + this.lnId + '/payment/' + id)
       .subscribe(
         (val) => {
           this.ngOnInit();
@@ -77,7 +77,7 @@ export class CompanyLnComponent implements OnInit {
     this.showNewPmForm = !this.showNewPmForm;
   }
 
-  startEditingPm(id: number) {
+  startEditingPayment(id: number) {
     this.editPmId = id;
   }
 

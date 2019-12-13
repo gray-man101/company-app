@@ -1,7 +1,8 @@
-export class Ln {
+export class Loan {
   id: number;
-  dbName: string;
+  debtorName: string;
   amount: number;
   amountToReturn: number;
+  investorInterest: number;
   status: string;
 }

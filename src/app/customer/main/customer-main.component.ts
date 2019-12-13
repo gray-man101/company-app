@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth.service';
 import {HttpClient} from '@angular/common/http';
 import {AccountInfo} from '../account-info';
+import {Investment} from '../../investment';
 
 @Component({
   selector: 'app-customer-main',
@@ -14,6 +15,7 @@ export class CustomerMainComponent implements OnInit {
   private showWithdrawForm: boolean;
   private withdrawAmount: number;
   private accountInfo = new AccountInfo();
+  private investments: Investment[] = [];
 
   constructor(private httpClient: HttpClient, private authService: AuthService) {
   }
@@ -23,11 +25,22 @@ export class CustomerMainComponent implements OnInit {
     this.topUpAmount = 0;
     this.showWithdrawForm = false;
     this.withdrawAmount = 0;
+    this.getAccountInfo();
+    this.getActiveInvestments();
+  }
+
+  getAccountInfo() {
     this.httpClient.get('http://localhost:8080/api/account').subscribe(
       (accountInfo: AccountInfo) => {
         this.accountInfo = accountInfo;
       }
     );
+  }
+
+  getActiveInvestments() {
+    this.httpClient.get('http://localhost:8080/api/investment').subscribe((data) => {
+      this.investments = data['content'];
+    });
   }
 
   topUp() {
@@ -36,8 +49,8 @@ export class CustomerMainComponent implements OnInit {
         this.ngOnInit();
       },
       (response) => {
+        alert('failed to top up money');
         console.log('POST call in error', response);
-        alert('failed to top up money: ' + response.error.message);
       }
     );
   }
@@ -49,7 +62,7 @@ export class CustomerMainComponent implements OnInit {
       },
       (response) => {
         console.log('POST call in error', response);
-        alert('failed to top up money: ' + response.error.message);
+        alert('failed to top up money: ' + response);
       }
     );
   }

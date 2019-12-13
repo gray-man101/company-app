@@ -7,9 +7,9 @@ import {LoginComponent} from './login/login.component';
 import {CompanyMainComponent} from './company/main/company-main.component';
 import {FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {CompanyLnComponent} from './company/ln/company-ln.component';
+import {CompanyLoanComponent} from './company/loan/company-loan.component';
 import {CustomerMainComponent} from './customer/main/customer-main.component';
-import {AvailableLnComponent} from './customer/customer-ln/available-ln.component';
+import {AvailableLoanComponent} from './customer/customer-ln/available-loan.component';
 import {AuthInterceptor} from './auth/auth-interceptor';
 import {ErrorInterceptor} from './auth/error-interceptor';
 
@@ -18,9 +18,9 @@ import {ErrorInterceptor} from './auth/error-interceptor';
     AppComponent,
     LoginComponent,
     CompanyMainComponent,
-    CompanyLnComponent,
+    CompanyLoanComponent,
     CustomerMainComponent,
-    AvailableLnComponent
+    AvailableLoanComponent
   ],
   imports: [
     BrowserModule,

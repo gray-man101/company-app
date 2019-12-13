@@ -1,12 +1,12 @@
 <div *ngFor="let pm of ps">
   <div *ngIf="editPmId != pm.id">
     {{pm.id}} - {{pm.amount}} - {{pm.created}}
-    <button (click)="startEditingPm(pm.id)">update pm</button>
-    <button (click)="deletePm(pm.id)">delete pm</button>
+    <button (click)="startEditingPayment(pm.id)">update pm</button>
+    <button (click)="deletePayment(pm.id)">delete pm</button>
   </div>
   <div *ngIf="editPmId == pm.id">
     <input type="number" [(ngModel)]="pm.amount">
-    <button (click)="updatePm(pm)">update pm</button>
+    <button (click)="updatePayment(pm)">update pm</button>
     <button (click)="editPmId = null">cancel</button>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth.service';
-import {Ln} from '../../ln';
-import {HttpClient} from '@angular/common/http';
+import {Loan} from '../../loan';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-company-main',
@@ -9,58 +9,58 @@ import {HttpClient} from '@angular/common/http';
 })
 export class CompanyMainComponent implements OnInit {
 
-  ls: Ln[] = [];
-  showNewLnForm: boolean;
+  loans: Loan[] = [];
+  showNewLoanForm: boolean;
   editLnId: number;
-  newLn: Ln;
+  newLoan: Loan;
 
   constructor(private authService: AuthService, private httpClient: HttpClient) {
   }
 
   ngOnInit() {
     this.editLnId = null;
-    this.showNewLnForm = false;
-    this.newLn = new Ln();
+    this.showNewLoanForm = false;
+    this.newLoan = new Loan();
     this.getLs();
   }
 
   getLs() {
-    this.httpClient.get('http://localhost:8080/api/ln').subscribe((data) => {
-      this.ls = data['content'];
+    this.httpClient.get('http://localhost:8080/api/loan').subscribe((data) => {
+      this.loans = data['content'];
     });
   }
 
-  createLn() {
-    this.httpClient.post('http://localhost:8080/api/ln', this.newLn).subscribe(
+  createLoan() {
+    this.httpClient.post('http://localhost:8080/api/loan', this.newLoan).subscribe(
       (val) => {
         this.ngOnInit();
       },
       (response) => {
-        alert('Failed to create ln: ' + response.error.message);
         console.log('POST call in error', response);
+        alert('Failed to create loan');
       }
     );
   }
 
-  updateLn(ln: Ln) {
-    this.httpClient.put('http://localhost:8080/api/ln/' + ln.id, ln).subscribe(
+  updateLn(loan: Loan) {
+    this.httpClient.put('http://localhost:8080/api/loan/' + loan.id, loan).subscribe(
       (val) => {
         this.ngOnInit();
       },
-      (response) => {
-        alert('Failed to update ln: ' + response.error.message);
-        console.log('PUT call in error', response);
+      (response:HttpErrorResponse) => {
+        console.log('1PUT call in error', response);
+        alert('Failed to update loan');
       }
     );
   }
 
-  deleteLn(id: number) {
-    this.httpClient.delete('http://localhost:8080/api/ln/' + id).subscribe(
+  deleteLoan(id: number) {
+    this.httpClient.delete('http://localhost:8080/api/loan/' + id).subscribe(
       (val) => {
         this.ngOnInit();
       },
       (response) => {
-        alert('Failed to delete ln: ' + response.error.message);
+        alert('Failed to delete loan: ' + response.error.message);
         console.log('DELETE call in error', response);
       }
     );
@@ -71,7 +71,7 @@ export class CompanyMainComponent implements OnInit {
   }
 
   toggleForm() {
-    this.showNewLnForm = !this.showNewLnForm;
+    this.showNewLoanForm = !this.showNewLoanForm;
   }
 
 }
