@@ -10,34 +10,34 @@ import {ActivatedRoute} from '@angular/router';
 export class CompanyLoanComponent implements OnInit {
 
   private loanId: number;
-  private ps: Payment[];
-  private showNewPmForm: boolean;
-  private newPm: Payment;
-  private editPmId: number;
+  private payments: Payment[];
+  private showNewPaymentForm: boolean;
+  private newPayment: Payment;
+  private editPaymentId: number;
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
   }
 
   ngOnInit() {
-    this.ps = [];
-    this.editPmId = null;
-    this.showNewPmForm = false;
-    this.newPm = new Payment();
+    this.payments = [];
+    this.editPaymentId = null;
+    this.showNewPaymentForm = false;
+    this.newPayment = new Payment();
     this.route.params.subscribe(params => {
       this.loanId = params['loanId'];
-      this.getPs();
+      this.getPayments();
     });
   }
 
-  getPs() {
+  getPayments() {
     this.httpClient.get('http://localhost:8080/api/loan/' + this.loanId + '/payment')
       .subscribe((data) => {
-        this.ps = data['content'];
+        this.payments = data['content'];
       });
   }
 
-  createPm() {
-    this.httpClient.post('http://localhost:8080/api/loan/' + this.loanId + '/payment', this.newPm)
+  createPayment() {
+    this.httpClient.post('http://localhost:8080/api/loan/' + this.loanId + '/payment', this.newPayment)
       .subscribe(
         (val) => {
           this.ngOnInit();
@@ -56,7 +56,7 @@ export class CompanyLoanComponent implements OnInit {
       },
       (response) => {
         console.log('PUT call in error', response);
-        alert('Failed to update pm: ' + response.error.message);
+        alert('Failed to update payment: ' + response.error.message);
       }
     );
   }
@@ -75,11 +75,11 @@ export class CompanyLoanComponent implements OnInit {
   }
 
   toggleCreateForm() {
-    this.showNewPmForm = !this.showNewPmForm;
+    this.showNewPaymentForm = !this.showNewPaymentForm;
   }
 
   startEditingPayment(id: number) {
-    this.editPmId = id;
+    this.editPaymentId = id;
   }
 
 }

@@ -1,32 +1,32 @@
-<table *ngIf="ps.length > 0" border="1">
+<table *ngIf="payments.length > 0" border="1">
   <tr>
     <td>Created</td>
     <td>Amount</td>
     <td>Action</td>
   </tr>
-  <tr *ngFor="let payment of ps">
-    <td *ngIf="editPmId != payment.id">{{payment.created}}</td>
-    <td *ngIf="editPmId != payment.id">{{payment.amount}}</td>
-    <td *ngIf="editPmId != payment.id">
-      <button (click)="startEditingPayment(payment.id)">update pm</button>
-      <button (click)="deletePayment(payment.id)">delete pm</button>
+  <tr *ngFor="let payment of payments">
+    <td *ngIf="editPaymentId != payment.id">{{payment.created}}</td>
+    <td *ngIf="editPaymentId != payment.id">{{payment.amount}}</td>
+    <td *ngIf="editPaymentId != payment.id">
+      <button (click)="startEditingPayment(payment.id)">update payment</button>
+      <button (click)="deletePayment(payment.id)">delete payment</button>
     </td>
-    <td *ngIf="editPmId == payment.id">{{payment.created}}</td>
-    <td *ngIf="editPmId == payment.id">
+    <td *ngIf="editPaymentId == payment.id">{{payment.created}}</td>
+    <td *ngIf="editPaymentId == payment.id">
       <input type="number" [(ngModel)]="payment.amount">
     </td>
-    <td *ngIf="editPmId == payment.id">
-      <button (click)="updatePayment(payment)">update pm</button>
+    <td *ngIf="editPaymentId == payment.id">
+      <button (click)="updatePayment(payment)">update payment</button>
       <button (click)="ngOnInit()">cancel</button>
     </td>
   </tr>
 </table>
 <div>
-  <button *ngIf="!showNewPmForm" (click)="toggleCreateForm()">Add new pm</button>
-  <div *ngIf="showNewPmForm">
+  <button *ngIf="!showNewPaymentForm" (click)="toggleCreateForm()">Add new payment</button>
+  <div *ngIf="showNewPaymentForm">
     <label for="amount">Amount</label>
-    <input type="number" name="amount" id="amount" placeholder="Amount" [(ngModel)]="newPm.amount"/><br>
-    <button (click)="createPm()">submit</button>
+    <input type="number" name="amount" id="amount" placeholder="Amount" [(ngModel)]="newPayment.amount"/><br>
+    <button (click)="createPayment()">submit</button>
     <button (click)="toggleCreateForm()">cancel</button>
   </div>
 </div>

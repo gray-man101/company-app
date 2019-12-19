@@ -21,10 +21,10 @@ export class CompanyMainComponent implements OnInit {
     this.editLoanId = null;
     this.showNewLoanForm = false;
     this.newLoan = new Loan();
-    this.getLs();
+    this.getLoans();
   }
 
-  getLs() {
+  getLoans() {
     this.httpClient.get('http://localhost:8080/api/loan').subscribe((data) => {
         this.loans = data['content'];
       },
