@@ -1,0 +1,15 @@
+<div>
+  <form *ngIf="!registrationSubmitted">
+    <input type="email" name="email" id="email" [(ngModel)]="newUser.email" placeholder="Email"><br>
+    <input type="text" name="firstName" id="firstName" [(ngModel)]="newUser.firstName" placeholder="First name"><br>
+    <input type="text" name="lastName" id="lastName" [(ngModel)]="newUser.lastName" placeholder="Last name"><br>
+    <input type="password" name="password" id="password" [(ngModel)]="newUser.password" placeholder="Password"><br>
+    <input type="password" name="passwordRepeat" id="passwordRepeat" [(ngModel)]="newUser.passwordRepeat"
+           placeholder="Password repeat"><br>
+    <input type="submit" value="Submit" (click)="register()">
+  </form>
+  <div *ngIf="registrationSubmitted">
+    <br>Go to your mailbox to complete registration <a href="http://localhost:1080/">http://localhost:1080/</a>
+    <br><a [routerLink]="['/login']">Login page</a>
+  </div>
+</div>

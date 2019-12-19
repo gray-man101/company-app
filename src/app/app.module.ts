@@ -12,11 +12,13 @@ import {CustomerMainComponent} from './customer/main/customer-main.component';
 import {AvailableLoanComponent} from './customer/customer-loan/available-loan.component';
 import {AuthInterceptor} from './auth/auth-interceptor';
 import {ErrorInterceptor} from './auth/error-interceptor';
+import {RegistrationComponent} from "./registration/registration.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    RegistrationComponent,
     CompanyMainComponent,
     CompanyLoanComponent,
     CustomerMainComponent,

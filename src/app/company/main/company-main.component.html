@@ -22,7 +22,7 @@
     <td>{{loan.status}}</td>
     <td>
       <span *ngIf="editLoanId != loan.id">
-        <button (click)="toggleUpdateForm(loan.id)">edit loan</button>
+        <button (click)="toggleUpdateForm(loan.id)" *ngIf="loan.status == 'NEW'">edit loan</button>
         <button (click)="deleteLoan(loan.id)" *ngIf="loan.status == 'NEW'">delete loan</button>
         <button (click)="setFailedStatus(loan.id)" *ngIf="loan.status == 'IN_PROGRESS'">set loan status to failed</button>
       </span>

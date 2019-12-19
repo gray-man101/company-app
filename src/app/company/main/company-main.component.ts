@@ -54,7 +54,6 @@ export class CompanyMainComponent implements OnInit {
       (response: HttpErrorResponse) => {
         console.log('PUT call in error', response);
         alert('Failed to update loan: ' + response.error.message);
-        this.ngOnInit();
       }
     );
   }
@@ -67,7 +66,6 @@ export class CompanyMainComponent implements OnInit {
       (response) => {
         console.log('DELETE call in error', response);
         alert('Failed to delete loan: ' + response.error.message);
-        this.ngOnInit();
       }
     );
   }
@@ -80,7 +78,6 @@ export class CompanyMainComponent implements OnInit {
       (response) => {
         console.log('POST call in error', response);
         alert('Failed to set loan status to failed: ' + response.error.message);
-        this.ngOnInit();
       }
     );
   }
