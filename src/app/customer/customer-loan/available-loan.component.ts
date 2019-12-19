@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Loan} from '../../loan';
 
 @Component({
-  selector: 'app-customer-ln',
+  selector: 'app-customer-loan',
   templateUrl: './available-loan.component.html'
 })
 export class AvailableLoanComponent implements OnInit {
@@ -30,7 +30,7 @@ export class AvailableLoanComponent implements OnInit {
       },
       (response) => {
         console.log('POST call in error', response);
-        alert('failed to invest in ln: ' + response);
+        alert('failed to invest in loan: ' + response.error.message);
       }
     );
   }

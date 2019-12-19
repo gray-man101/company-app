@@ -9,7 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {CompanyLoanComponent} from './company/loan/company-loan.component';
 import {CustomerMainComponent} from './customer/main/customer-main.component';
-import {AvailableLoanComponent} from './customer/customer-ln/available-loan.component';
+import {AvailableLoanComponent} from './customer/customer-loan/available-loan.component';
 import {AuthInterceptor} from './auth/auth-interceptor';
 import {ErrorInterceptor} from './auth/error-interceptor';
 

@@ -3,6 +3,6 @@ export class Investment {
   debtorName: string;
   payments: number;
   paidAmount: number;
-  amount: number;
+  overallAmount: number;
   amountToReceive: number;
 }

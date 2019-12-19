@@ -4,12 +4,12 @@ import {Payment} from '../../payment';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-ln',
+  selector: 'app-loan',
   templateUrl: './company-loan.component.html'
 })
 export class CompanyLoanComponent implements OnInit {
 
-  private lnId: number;
+  private loanId: number;
   private ps: Payment[];
   private showNewPmForm: boolean;
   private newPm: Payment;
@@ -19,56 +19,57 @@ export class CompanyLoanComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ps = [];
     this.editPmId = null;
     this.showNewPmForm = false;
     this.newPm = new Payment();
     this.route.params.subscribe(params => {
-      this.lnId = params['lnId'];
+      this.loanId = params['loanId'];
       this.getPs();
     });
   }
 
   getPs() {
-    this.httpClient.get('http://localhost:8080/api/ln/' + this.lnId + '/pm')
+    this.httpClient.get('http://localhost:8080/api/loan/' + this.loanId + '/payment')
       .subscribe((data) => {
         this.ps = data['content'];
       });
   }
 
   createPm() {
-    this.httpClient.post('http://localhost:8080/api/ln/' + this.lnId + '/pm', this.newPm)
+    this.httpClient.post('http://localhost:8080/api/loan/' + this.loanId + '/payment', this.newPm)
       .subscribe(
         (val) => {
           this.ngOnInit();
         },
         (response) => {
-          alert('Failed to create pm: ' + response.error.message);
           console.log('POST call in error', response);
+          alert('Failed to create payment: ' + response.error.message);
         }
       );
   }
 
   updatePayment(payment: Payment) {
-    this.httpClient.put('http://localhost:8080/api/loan/' + this.lnId + '/payment/' + payment.id, payment).subscribe(
+    this.httpClient.put('http://localhost:8080/api/loan/' + this.loanId + '/payment/' + payment.id, payment).subscribe(
       (val) => {
         this.ngOnInit();
       },
       (response) => {
-        alert('Failed to update pm: ' + response.error.message);
         console.log('PUT call in error', response);
+        alert('Failed to update pm: ' + response.error.message);
       }
     );
   }
 
   deletePayment(id: number) {
-    this.httpClient.delete('http://localhost:8080/api/loan/' + this.lnId + '/payment/' + id)
+    this.httpClient.delete('http://localhost:8080/api/loan/' + this.loanId + '/payment/' + id)
       .subscribe(
         (val) => {
           this.ngOnInit();
         },
         (response) => {
-          alert('Failed to delete pm: ' + response.error.message);
           console.log('DELETE call in error', response);
+          alert('Failed to delete payment: ' + response.error.message);
         }
       );
   }

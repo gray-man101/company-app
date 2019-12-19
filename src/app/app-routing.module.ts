@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {AuthGuardService} from './auth/auth-guard.service';
 import {CompanyLoanComponent} from './company/loan/company-loan.component';
-import {AvailableLoanComponent} from './customer/customer-ln/available-loan.component';
+import {AvailableLoanComponent} from './customer/customer-loan/available-loan.component';
 import {CustomerMainComponent} from './customer/main/customer-main.component';
 import {CompanyMainComponent} from './company/main/company-main.component';
 

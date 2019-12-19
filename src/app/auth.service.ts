@@ -21,18 +21,6 @@ export class AuthService {
     return this.roleInfoSubject.value;
   }
 
-  isAuthenticated() {
-    return false;
-  }
-
-  hasRole(role: string) {
-    if (!this.roleInfoSubject.value) {
-      return false;
-    }
-
-    return this.roleInfoSubject.value.role == role;
-  }
-
   login(username: string, password: string) {
     const body = new HttpParams()
       .set('username', username)
@@ -62,8 +50,8 @@ export class AuthService {
         },
         (response) => {
           console.log('failed to log in');
-          console.log(response);
-          alert('failed to log in: ' + response);
+          console.log('POST call in error', response);
+          alert('failed to log in');
         }
       );
   }
@@ -77,7 +65,8 @@ export class AuthService {
           this.router.navigate(['/login']);
         },
         (response) => {
-          console.log('failed to log out' + response);
+          console.log('failed to log out');
+          console.log('POST call in error', response);
           this.roleInfoSubject.next(null);
           this.router.navigate(['/login']);
         }

@@ -1,15 +1,26 @@
-<div *ngFor="let pm of ps">
-  <div *ngIf="editPmId != pm.id">
-    {{pm.id}} - {{pm.amount}} - {{pm.created}}
-    <button (click)="startEditingPayment(pm.id)">update pm</button>
-    <button (click)="deletePayment(pm.id)">delete pm</button>
-  </div>
-  <div *ngIf="editPmId == pm.id">
-    <input type="number" [(ngModel)]="pm.amount">
-    <button (click)="updatePayment(pm)">update pm</button>
-    <button (click)="editPmId = null">cancel</button>
-  </div>
-</div>
+<table *ngIf="ps.length > 0" border="1">
+  <tr>
+    <td>Created</td>
+    <td>Amount</td>
+    <td>Action</td>
+  </tr>
+  <tr *ngFor="let payment of ps">
+    <td *ngIf="editPmId != payment.id">{{payment.created}}</td>
+    <td *ngIf="editPmId != payment.id">{{payment.amount}}</td>
+    <td *ngIf="editPmId != payment.id">
+      <button (click)="startEditingPayment(payment.id)">update pm</button>
+      <button (click)="deletePayment(payment.id)">delete pm</button>
+    </td>
+    <td *ngIf="editPmId == payment.id">{{payment.created}}</td>
+    <td *ngIf="editPmId == payment.id">
+      <input type="number" [(ngModel)]="payment.amount">
+    </td>
+    <td *ngIf="editPmId == payment.id">
+      <button (click)="updatePayment(payment)">update pm</button>
+      <button (click)="ngOnInit()">cancel</button>
+    </td>
+  </tr>
+</table>
 <div>
   <button *ngIf="!showNewPmForm" (click)="toggleCreateForm()">Add new pm</button>
   <div *ngIf="showNewPmForm">

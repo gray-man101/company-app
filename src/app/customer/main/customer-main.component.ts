@@ -49,8 +49,8 @@ export class CustomerMainComponent implements OnInit {
         this.ngOnInit();
       },
       (response) => {
-        alert('failed to top up money');
         console.log('POST call in error', response);
+        alert('failed to top up money: ' + response.error.message);
       }
     );
   }
@@ -62,7 +62,7 @@ export class CustomerMainComponent implements OnInit {
       },
       (response) => {
         console.log('POST call in error', response);
-        alert('failed to top up money: ' + response);
+        alert('failed to top up money: ' + response.error.message);
       }
     );
   }

@@ -11,14 +11,14 @@ export class CompanyMainComponent implements OnInit {
 
   loans: Loan[] = [];
   showNewLoanForm: boolean;
-  editLnId: number;
+  editLoanId: number;
   newLoan: Loan;
 
   constructor(private authService: AuthService, private httpClient: HttpClient) {
   }
 
   ngOnInit() {
-    this.editLnId = null;
+    this.editLoanId = null;
     this.showNewLoanForm = false;
     this.newLoan = new Loan();
     this.getLs();
@@ -26,8 +26,12 @@ export class CompanyMainComponent implements OnInit {
 
   getLs() {
     this.httpClient.get('http://localhost:8080/api/loan').subscribe((data) => {
-      this.loans = data['content'];
-    });
+        this.loans = data['content'];
+      },
+      (response) => {
+        console.log('GET call in error', response);
+        alert('Failed to get loans: ' + response.error.message);
+      });
   }
 
   createLoan() {
@@ -37,19 +41,20 @@ export class CompanyMainComponent implements OnInit {
       },
       (response) => {
         console.log('POST call in error', response);
-        alert('Failed to create loan');
+        alert('Failed to create loan: ' + response.error.message);
       }
     );
   }
 
-  updateLn(loan: Loan) {
+  updateLoan(loan: Loan) {
     this.httpClient.put('http://localhost:8080/api/loan/' + loan.id, loan).subscribe(
       (val) => {
         this.ngOnInit();
       },
-      (response:HttpErrorResponse) => {
-        console.log('1PUT call in error', response);
-        alert('Failed to update loan');
+      (response: HttpErrorResponse) => {
+        console.log('PUT call in error', response);
+        alert('Failed to update loan: ' + response.error.message);
+        this.ngOnInit();
       }
     );
   }
@@ -60,17 +65,31 @@ export class CompanyMainComponent implements OnInit {
         this.ngOnInit();
       },
       (response) => {
-        alert('Failed to delete loan: ' + response.error.message);
         console.log('DELETE call in error', response);
+        alert('Failed to delete loan: ' + response.error.message);
+        this.ngOnInit();
+      }
+    );
+  }
+
+  setFailedStatus(id: number) {
+    this.httpClient.post('http://localhost:8080/api/loan/' + id + '/fail', null).subscribe(
+      (val) => {
+        this.ngOnInit();
+      },
+      (response) => {
+        console.log('POST call in error', response);
+        alert('Failed to set loan status to failed: ' + response.error.message);
+        this.ngOnInit();
       }
     );
   }
 
   toggleUpdateForm(id: number) {
-    this.editLnId = id;
+    this.editLoanId = id;
   }
 
-  toggleForm() {
+  toggleCreateForm() {
     this.showNewLoanForm = !this.showNewLoanForm;
   }
 
