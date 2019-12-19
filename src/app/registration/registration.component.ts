@@ -10,8 +10,8 @@ import {HttpClient} from "@angular/common/http";
 })
 export class RegistrationComponent implements OnInit {
 
-  private newUser: NewUser;
-  private registrationSubmitted: boolean;
+  newUser: NewUser;
+  registrationSubmitted: boolean;
 
   constructor(private authService: AuthService, private httpClient: HttpClient, private router: Router) {
     let currentUserValue = this.authService.getCurrentUserRole();

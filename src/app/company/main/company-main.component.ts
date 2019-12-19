@@ -90,4 +90,8 @@ export class CompanyMainComponent implements OnInit {
     this.showNewLoanForm = !this.showNewLoanForm;
   }
 
+  logout() {
+    this.authService.logout();
+  }
+
 }

@@ -5,7 +5,7 @@ import {Component} from '@angular/core';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'company-app';
+  title = 'loan-app';
 
   constructor() {
   }

@@ -1,4 +1,4 @@
-<button (click)="authService.logout()">logout</button>
+<button (click)="logout()">logout</button>
 <p *ngIf="loans.length > 0">Payments can be created for loans in status 'IN_PROGRESS'. For loan to get into status
   'IN_PROGRESS' someone should invest in it</p>
 <table *ngIf="loans.length > 0" border="1">

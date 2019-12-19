@@ -9,11 +9,11 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class CompanyLoanComponent implements OnInit {
 
-  private loanId: number;
-  private payments: Payment[];
-  private showNewPaymentForm: boolean;
-  private newPayment: Payment;
-  private editPaymentId: number;
+  loanId: number;
+  payments: Payment[];
+  showNewPaymentForm: boolean;
+  newPayment: Payment;
+  editPaymentId: number;
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient) {
   }

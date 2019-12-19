@@ -10,12 +10,12 @@ import {Investment} from '../../investment';
 })
 export class CustomerMainComponent implements OnInit {
 
-  private showTopUpForm: boolean;
-  private topUpAmount: number;
-  private showWithdrawForm: boolean;
-  private withdrawAmount: number;
-  private accountInfo = new AccountInfo();
-  private investments: Investment[] = [];
+  showTopUpForm: boolean;
+  topUpAmount: number;
+  showWithdrawForm: boolean;
+  withdrawAmount: number;
+  accountInfo = new AccountInfo();
+  investments: Investment[] = [];
 
   constructor(private httpClient: HttpClient, private authService: AuthService) {
   }
@@ -65,5 +65,9 @@ export class CustomerMainComponent implements OnInit {
         alert('failed to top up money: ' + response.error.message);
       }
     );
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

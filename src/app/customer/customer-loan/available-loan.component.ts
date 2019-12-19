@@ -8,7 +8,7 @@ import {Loan} from '../../loan';
 })
 export class AvailableLoanComponent implements OnInit {
 
-  private loans: Loan[] = [];
+  loans: Loan[] = [];
 
   constructor(private httpClient: HttpClient) {
   }
