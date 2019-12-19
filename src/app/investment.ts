@@ -2,7 +2,7 @@ export class Investment {
   id: number;
   debtorName: string;
   payments: number;
-  paidAmount: number;
+  percentageComplete: number;
   overallAmount: number;
   amountToReceive: number;
 }

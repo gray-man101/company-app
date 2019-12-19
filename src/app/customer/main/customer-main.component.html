@@ -18,14 +18,14 @@
     <tr>
       <td>Debtor name</td>
       <td>Number of payments</td>
-      <td>Paid amount</td>
+      <td>Percentage complete</td>
       <td>Loan amount amount</td>
       <td>Amount to receive</td>
     </tr>
     <tr *ngFor="let investment of investments">
       <td>{{investment.debtorName}}</td>
       <td>{{investment.payments}}</td>
-      <td>{{investment.paidAmount}}</td>
+      <td>{{investment.percentageComplete}}%</td>
       <td>{{investment.overallAmount}}</td>
       <td>{{investment.amountToReceive}}</td>
     </tr>

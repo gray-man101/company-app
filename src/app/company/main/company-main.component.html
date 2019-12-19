@@ -37,8 +37,8 @@
 <div>
   <button *ngIf="!showNewLoanForm" (click)="toggleCreateForm()">Add new loan</button>
   <div *ngIf="showNewLoanForm">
-    <label for="dbName">Debtor name</label>
-    <input type="text" name="dbName" id="dbName" placeholder="Debtor name" [(ngModel)]="newLoan.debtorName"/><br>
+    <label for="debtorName">Debtor name</label>
+    <input type="text" name="debtorName" id="debtorName" placeholder="Debtor name" [(ngModel)]="newLoan.debtorName"/><br>
     <label for="amount">Amount</label>
     <input type="number" name="amount" id="amount" placeholder="Amount" [(ngModel)]="newLoan.amount"/><br>
     <label for="amountToReturn">Amount to return</label>
